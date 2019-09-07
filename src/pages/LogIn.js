@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoImg from "../img/RIAM.png";
-import { Card, Logo, Button, Form, Input } from "../components/AuthForms";
+import { Card, Logo, Button, Form, Input } from "../components/AuthForm";
 
 function LogIn() {
   return (
@@ -17,4 +17,4 @@ function LogIn() {
   );
 }
 
-export default Login;
+export default LogIn;
