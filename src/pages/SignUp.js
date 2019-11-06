@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
+import axios from "axios";
 import LogoImg from "../img/RIAM.png";
-import { Card, Logo, Input, Form, Button } from "../components/AuthForm";
+import { Card, Logo, Input, Form, Button, Error } from "../components/AuthForm";
 import { useAuth } from "../context/auth";
 
 function SignUp() {
-  const [isSignedUp, setSignedUp] = useState(false);
-  const [IsError, setIsError] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [surname, setSurname] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { setAuthTokens } = useAuth();
 
-  function postLogin() {
+  function postSignUp() {
     axios
       .post("https://www.somePlace.com/auth/signup", {
         userName,
@@ -38,12 +42,47 @@ function SignUp() {
     <Card>
       <Logo src={LogoImg} />
       <Form>
-        <Input type="first name" placeholder="First Name" />
-        <Input type="surname" placeholder="Surname" />
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-        <Input type="password" placeholder="Confirm Password" />
-        <Button>Sign Up</Button>
+        <Input
+          type="first name"
+          value={firstName}
+          onChange={e => {
+            setFirstName(e.target.value);
+          }}
+          placeholder="First Name"
+        />
+        <Input
+          type="surname"
+          value={surname}
+          onChange={e => {
+            setSurname(e.target.value);
+          }}
+          placeholder="Surname"
+        />
+        <Input
+          type="email"
+          value={userName}
+          onChange={e => {
+            setUserName(e.target.value);
+          }}
+          placeholder="Email"
+        />
+        <Input
+          type="password"
+          value={password}
+          onChange={e => {
+            setPassword(e.target.value);
+          }}
+          placeholder="Password"
+        />
+        <Input
+          type="password"
+          value={confirmPassword}
+          onChange={e => {
+            setConfirmPassword(e.target.value);
+          }}
+          placeholder="Confirm Password"
+        />
+        <Button onClick={postSignUp}>Sign Up</Button>
       </Form>
       <Link to="/login">Already have an account?</Link>
       {isError && <Error>The passwords provided are not the same</Error>}

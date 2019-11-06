@@ -20,7 +20,7 @@ function LogIn() {
       })
       .then(result => {
         if (result.state === 200) {
-          setAuthTokens(results.data);
+          setAuthTokens(result.data);
           setLoggedIn(true);
         } else {
           setIsError(true);
