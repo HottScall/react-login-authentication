@@ -57,7 +57,7 @@ function LogIn() {
         <Button onClick={postLogin}>Sign In</Button>
       </Form>
 
-      <Link to="/signup">Dont have an account?</Link>
+      <Link to="/signup">Already have an account?</Link>
       {isError && (
         <Error>The username or password provided was incorrect</Error>
       )}
