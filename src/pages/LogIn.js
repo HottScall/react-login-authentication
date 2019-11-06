@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-import LogoImg from "../img/RIAM.png";
-import { Card, Logo, Button, Form, Input, Error } from "../components/AuthForm";
+import logoImg from "../img/RIAM.png";
+import { Card, Logo, Form, Input, Button, Error } from "../components/AuthForm";
 import { useAuth } from "../context/auth";
 
-function LogIn() {
+function Login() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [setAuthTokens] = useAuth();
+  const { setAuthTokens } = useAuth();
 
   function postLogin() {
     axios
@@ -19,7 +19,7 @@ function LogIn() {
         password
       })
       .then(result => {
-        if (result.state === 200) {
+        if (result.status === 200) {
           setAuthTokens(result.data);
           setLoggedIn(true);
         } else {
@@ -30,16 +30,17 @@ function LogIn() {
         setIsError(true);
       });
   }
+
   if (isLoggedIn) {
     return <Redirect to="/" />;
   }
 
   return (
     <Card>
-      <Logo src={LogoImg} />
+      <Logo src={logoImg} />
       <Form>
         <Input
-          type="email"
+          type="username"
           value={userName}
           onChange={e => {
             setUserName(e.target.value);
@@ -56,13 +57,12 @@ function LogIn() {
         />
         <Button onClick={postLogin}>Sign In</Button>
       </Form>
-
-      <Link to="/signup">Already have an account?</Link>
+      <Link to="/signup">Dont have an account?</Link>
       {isError && (
-        <Error>The username or password provided was incorrect</Error>
+        <Error>The username or password provided were incorrect!</Error>
       )}
     </Card>
   );
 }
 
-export default LogIn;
+export default Login;
