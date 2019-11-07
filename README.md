@@ -1,4 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A walkthrough of the application can be found here: https://medium.com/better-programming/building-basic-react-authentication-e20a574d5e71
 
 ## Available Scripts
 
